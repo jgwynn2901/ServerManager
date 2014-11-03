@@ -1,0 +1,104 @@
+﻿body {
+  padding-top: 50px;
+  padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+  white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+  max-width: 280px;
+}
+
+#logoutForm {
+  display: inline-block;
+  height: 100%;
+}
+
+.form-signin {
+  max-width: 300px;
+  padding: 19px 29px 29px;
+  margin: 0 auto 20px;
+  background-color: #fff;
+  border: 1px solid #e5e5e5;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+  -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+  box-shadow: 0 1px 2px rgba(0,0,0,.05);
+}
+
+  .form-signin .form-signin-heading,
+  .form-signin .checkbox {
+    margin-bottom: 10px;
+  }
+
+  .form-signin input[type="text"],
+  .form-signin input[type="password"] {
+    font-size: 16px;
+    height: auto;
+    margin-bottom: 15px;
+    padding: 7px 9px;
+  }
+  .searchBar {
+    margin: 24px auto 20px;
+  }
+  .table {
+    margin-top: 25px;
+  }
+  .alert {
+    margin-top: 25px;
+    background-color: #e74c3c;
+  }
+  .alerts {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+
+    width: 350px;
+    z-index: 10000;
+}
+
+.alerts .alert {
+    position: relative;
+}
+
+.alert.animation.ng-enter {
+  -webkit-animation: enter_sequence 0.2s ease-in; /* Safari/Chrome */
+  animation: enter_sequence 0.2s ease-in; /* IE10+ and Future Browsers */
+}
+@-webkit-keyframes enter_sequence {
+  from { opacity:0; }
+  to { opacity:1; }
+}
+@keyframes enter_sequence {
+  from { opacity:0; }
+  to { opacity:1; }
+}
+
+.alert.animation.ng-leave {
+  -webkit-animation: exit_sequence 0.2s ease-in-out; /* Safari/Chrome */
+  animation: exit_sequence 0.2s ease-in-out; /* IE10+ and Future Browsers */
+}
+@-webkit-keyframes exit_sequence {
+  from { opacity:1; }
+  to { opacity:0; right: -100px; }
+}
+@keyframes exit_sequence {
+  from { opacity:1; }
+  to { opacity:0; right: -100px; }
+}

@@ -1,0 +1,29 @@
+﻿@model ServerManager.Models.LoginModel
+
+@{
+    ViewBag.Title = "Log in";
+}
+
+<section id="loginForm">
+  
+  <div class="col-md-12">
+    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-signin", @role = "form" }))
+    {
+      <h2 class="form-signin-heading">Please log in</h2>
+      @Html.AntiForgeryToken()
+      @Html.ValidationSummary(true)
+      @Html.LabelFor(m => m.UserName)
+      @Html.TextBoxFor(m => m.UserName, new { @placeholder = "username", @class = "form-control" })
+      @Html.ValidationMessageFor(m => m.UserName)
+      @Html.LabelFor(m => m.Password)
+      @Html.PasswordFor(m => m.Password, new { @placeholder = "password", @class = "form-control" })
+      @Html.ValidationMessageFor(m => m.Password)
+
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
+    }
+  </div>
+</section>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
