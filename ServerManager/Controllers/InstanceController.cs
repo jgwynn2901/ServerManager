@@ -7,9 +7,9 @@ namespace ServerManager.Controllers
     public class InstanceController : ApiController
     {
         // GET: api/Instance
-        public IEnumerable<string> Get()
+        public IEnumerable<string> Get(string id)
         {
-          return ServerRepository.GetInstanceList();
+          return ServerRepository.GetInstanceList(id);
         }
     }
 }

@@ -13,16 +13,9 @@
 
   app.controller('ctrl', function ($scope, $http, $timeout) {
 
+    $scope.instance = "";
     $scope.instances = [];
-    
-    $scope.rowCollection = [
-        { Name: 'walws12sedpr', IpAddress: '10.1.112.91', Uri: 'http://walws12sedpr.na.tigplc.com', Role: 'webserver' },
-        { Name: 'walws13sedpr', IpAddress: '10.1.112.92', Uri: 'http://walws13sedpr.na.tigplc.com', Role: 'webserver' },
-        { Name: 'walws14sedpr', IpAddress: '10.1.112.93', Uri: 'http://walws14sedpr.na.tigplc.com', Role: 'webserver' },
-        { Name: 'walws15sedpr', IpAddress: '10.1.112.94', Uri: 'http://walws15sedpr.na.tigplc.com', Role: 'webserver' },
-        { Name: 'walws16sedpr', IpAddress: '10.1.112.95', Uri: 'http://walws16sedpr.na.tigplc.com', Role: 'webserver' },
-        { Name: 'walws17sedpr', IpAddress: '10.1.112.96', Uri: 'http://walws17sedpr.na.tigplc.com', Role: 'webserver' }];
-
+    $scope.servers = [];
     $scope.alerts = [];
 
     $scope.addAlert = function (message) {
@@ -34,9 +27,10 @@
       $scope.alerts.splice(index, 1);
     };
 
-    $scope.getInstances = function () {
-      return $http.get('/api/instance/')
+    $scope.getInstances = function (filter) {
+      return $http.get('/api/instance/' + filter)
         .then(function (res) {
+          $scope.instances = [];
           angular.forEach(res.data, function (item) {
             $scope.instances.push(item);
           });
@@ -44,6 +38,26 @@
         },
         function (res) {
             alert(res.statusText || "Unable to connect to localhost/server");
+        });
+    };
+
+    $scope.onInstanceChange = function() {
+      if ($scope.instance.length > 3) {
+        $scope.getServers($scope.instance);
+      }
+    };
+
+    $scope.getServers = function (filter) {
+      return $http.get('/api/server/' + filter)
+        .then(function (res) {
+          $scope.servers = [];
+          angular.forEach(res.data, function (item) {
+            $scope.servers.push(item);
+          });
+          return $scope.servers;
+        },
+        function (res) {
+          alert(res.statusText || "Unable to connect to localhost/server");
         });
     };
   });
