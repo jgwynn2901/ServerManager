@@ -12,7 +12,7 @@
                  typeahead="instance for instance in getInstances($viewValue)"
                  title="May I have the database instance?" autocomplete="off"
                  ng-model="instance" typeahead-loading="loadingInstances" />
-          <i ng-show="loadingInstances" class="glyphicon glyphicon-refresh"> loading</i>
+          <i ng-show="loadingInstances" class="fa fa-refresh"> loading</i>
         </div>
       </div>
       <div class="form-group">
@@ -22,7 +22,7 @@
           <input type="text" id="server_name" placeholder="Server" class="form-control"
                  typeahead="name for name in getServerNames($viewValue)"
                  ng-model="server" autocomplete="off" typeahead-loading="loadingServers" />
-          <i ng-show="loadingServers" class="glyphicon glyphicon-refresh"> loading</i>
+          <i ng-show="loadingServers" class="fa fa-refresh"> loading</i>
         </div>
       </div>
       <div class="form-group">
