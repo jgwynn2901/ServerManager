@@ -25,6 +25,7 @@ namespace ServerManager
       bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/bootstrap.min.css",
                 "~/Content/font-awesome.css",
+                "~/Content/ngToast.css",
                 "~/Content/site.css"));
 
       bundles.Add(new ScriptBundle("~/bundles/src").Include(
@@ -34,6 +35,8 @@ namespace ServerManager
                   "~/Scripts/angular.js",
                   "~/Scripts/angular-animate.js",
                   "~/Scripts/angular-route.js",
+                  "~/Scripts/angular-sanitize.js",
+                  "~/Scripts/ngToast.js",
                   "~/Scripts/angular-ui/ui-bootstrap-tpls.js",
                   "~/Scripts//angular-ui/smart-table.js"));
 

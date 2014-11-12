@@ -1,7 +1,7 @@
 ﻿(function () {
   'use strict';
 
-  var app = angular.module('app', ['ui.bootstrap', 'smart-table']);
+  var app = angular.module('app', ['ui.bootstrap', 'smart-table', 'ngToast']);
 
   app.config(function ($httpProvider) {
     $httpProvider.defaults.useXDomain = true;
@@ -11,7 +11,7 @@
     $httpProvider.defaults.headers.common["Content-Type"] = "application/json";
   });
 
-  app.controller('ctrl', function ($scope, $http, $timeout) {
+  app.controller('ctrl', function ($scope, $http, $timeout, ngToast) {
     $scope.instances = [];
     $scope.servers = [];
     $scope.serverNames = [];
@@ -21,8 +21,9 @@
     $scope.admin = true;
 
     $scope.addAlert = function (message) {
-      $scope.alerts.push({ type: "warning", msg: message });
-      $timeout(function () { $scope.closeAlert($scope.alerts.length - 1); }, 3000);
+      ngToast.create(message);
+      //$scope.alerts.push({ type: "warning", msg: message });
+      //$timeout(function () { $scope.closeAlert($scope.alerts.length - 1); }, 3000);
     };
 
     $scope.closeAlert = function (index) {
@@ -30,7 +31,7 @@
     };
 
     $scope.getInstances = function (filter) {
-      return $http.get('serverlist/api/instance/' + filter)
+      return $http.get('/serverlist/api/instance/' + filter)
         .then(function (res) {
           $scope.instances = [];
           angular.forEach(res.data, function (item) {
@@ -39,18 +40,17 @@
           return $scope.instances;
         },
         function (res) {
-            alert(res.statusText || "Unable to connect to localhost/server");
+          addAlert(res.statusText || "Unable to connect to localhost/server");
         });
     };
-
-    $scope.onInstanceChange = function() {
+    $scope.$watch('instance', function () {
       if ($scope.instance.length > 3) {
         $scope.getServers($scope.instance);
       }
-    };
-    
+    });
+
     $scope.getServers = function (filter) {
-      return $http.get('serverlist/api/server/' + filter)
+      return $http.get('/serverlist/api/server/' + filter)
         .then(function (res) {
           $scope.servers = [];
           $scope.serverNames = [];
@@ -61,7 +61,7 @@
           return $scope.servers;
         },
         function (res) {
-          alert(res.statusText || "Unable to connect to localhost/server");
+          addAlert(res.statusText || "Unable to connect to localhost/server");
         });
     };
 

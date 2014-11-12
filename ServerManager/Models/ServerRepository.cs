@@ -39,7 +39,7 @@ namespace ServerManager.Models
     /// <returns></returns>
     static public List<string> GetInstanceList(string filter)
     {
-      if (_instanceList != null && _instanceList.Count > 0) return _instanceList.Where(a=>a.StartsWith(filter)).ToList();
+      if (_instanceList != null && _instanceList.Count > 0) return _instanceList.Where(a=>a.StartsWith(filter)).Distinct().ToList();
       lock (SynchLock)
       {
         if (_instanceList == null)
@@ -53,7 +53,7 @@ namespace ServerManager.Models
           .Distinct();
         _instanceList.AddRange(list.ToList());
       }
-      return _instanceList.Where(a => a.StartsWith(filter)).ToList();
+      return _instanceList.Where(a => a.StartsWith(filter)).Distinct().ToList();
     }
 
   }

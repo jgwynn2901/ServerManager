@@ -1,9 +1,8 @@
 ﻿@{
-    ViewBag.Title = "Home";
+  ViewBag.Title = "Home";
 }
 <div class="container">
   <div class="searchBar">
-
     <form class="form-inline" role="form">
       <div class="form-group">
         <label class="sr-only" for="instance">Instance</label>
@@ -12,12 +11,10 @@
           <input type="text" id="instance" placeholder="Instance" class="form-control"
                  typeahead="instance for instance in getInstances($viewValue)"
                  title="May I have the database instance?" autocomplete="off"
-                 ng-model="instance" typeahead-loading="loadingInstances"
-                 ng-blur="onInstanceChange()" />
+                 ng-model="instance" typeahead-loading="loadingInstances" />
           <i ng-show="loadingInstances" class="glyphicon glyphicon-refresh"> loading</i>
-          
         </div>
-        </div>
+      </div>
       <div class="form-group">
         <label class="sr-only" for="server_name">Server Name</label>
         <div class="input-group">
@@ -28,13 +25,15 @@
           <i ng-show="loadingServers" class="glyphicon glyphicon-refresh"> loading</i>
         </div>
       </div>
-      <div class="row">
-        <div class="col-md-12">
-          <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+      <div class="form-group">
+        <div class="input-group">
+          <button class="btn btn-success" ng-disabled="server.length == 0" ng-click="addAlert('not ready.')">
+            <i class="fa fa-binoculars">
+            </i>&nbsp;View
+          </button>
         </div>
       </div>
       <div class="row">
-        
         <table st-table="rowCollection" class="table table-striped">
           <thead>
             <tr>
@@ -53,7 +52,7 @@
               <td>{{row.Role}}</td>
               <td>{{row.Description}}</td>
               <td>
-                <button type="button" class="btn btn-sm btn-success dropdown-toggle" ng-click="addAlert('You will need permission from the administrator.')" ng-disabled="admin">
+                <button type="button" class="btn btn-sm btn-success dropdown-toggle" ng-click="addAlert('admin only.')" ng-disabled="admin">
                   <i class="fa fa-caret-down">
                   </i>
                 </button>
@@ -61,18 +60,12 @@
             </tr>
           </tbody>
         </table>
-        <button type="button" ng-click="addAlert('This functionality is not quite ready.')" class="btn btn-sm btn-success">
-          <i class="glyphicon glyphicon-plus">
-          </i>&nbsp;Add Server
+        <button type="button" ng-click="addAlert('not ready.')" class="btn btn-sm btn-success" ng-disabled="admin">
+          <i class="fa fa-plus">
+          </i>&nbsp;Add
         </button>
-
-      </div>
-      <div class="row">
-        <div class="col-md-12">
-          <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
-        </div>
       </div>
     </form>
   </div>
 </div>
-  
+
