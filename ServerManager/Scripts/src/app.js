@@ -12,11 +12,13 @@
   });
 
   app.controller('ctrl', function ($scope, $http, $timeout) {
-
-    $scope.instance = "";
     $scope.instances = [];
     $scope.servers = [];
+    $scope.serverNames = [];
     $scope.alerts = [];
+    $scope.instance = "";
+    $scope.server = "";
+    $scope.admin = true;
 
     $scope.addAlert = function (message) {
       $scope.alerts.push({ type: "warning", msg: message });
@@ -28,7 +30,7 @@
     };
 
     $scope.getInstances = function (filter) {
-      return $http.get('/api/instance/' + filter)
+      return $http.get('serverlist/api/instance/' + filter)
         .then(function (res) {
           $scope.instances = [];
           angular.forEach(res.data, function (item) {
@@ -46,19 +48,31 @@
         $scope.getServers($scope.instance);
       }
     };
-
+    
     $scope.getServers = function (filter) {
-      return $http.get('/api/server/' + filter)
+      return $http.get('serverlist/api/server/' + filter)
         .then(function (res) {
           $scope.servers = [];
+          $scope.serverNames = [];
           angular.forEach(res.data, function (item) {
             $scope.servers.push(item);
+            $scope.serverNames.push(item.Name);
           });
           return $scope.servers;
         },
         function (res) {
           alert(res.statusText || "Unable to connect to localhost/server");
         });
+    };
+
+    $scope.getServerNames = function (filter) {
+      var results = [];
+      angular.forEach($scope.serverNames, function(item) {
+        if (item.match(filter)) {
+          results.push(item);
+        }
+      });
+      return results;
     };
   });
 })();

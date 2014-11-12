@@ -12,7 +12,7 @@
           <input type="text" id="instance" placeholder="Instance" class="form-control"
                  typeahead="instance for instance in getInstances($viewValue)"
                  title="May I have the database instance?" autocomplete="off"
-                 ng-model="instance" typeahead-loading="loadingMakes"
+                 ng-model="instance" typeahead-loading="loadingInstances"
                  ng-blur="onInstanceChange()" />
           <i ng-show="loadingInstances" class="glyphicon glyphicon-refresh"> loading</i>
           
@@ -22,7 +22,15 @@
         <label class="sr-only" for="server_name">Server Name</label>
         <div class="input-group">
           <span class="input-group-addon"><i class="fa fa-laptop"></i></span>
-          <input type="text" id="server_name" placeholder="Server" class="form-control"/>
+          <input type="text" id="server_name" placeholder="Server" class="form-control"
+                 typeahead="name for name in getServerNames($viewValue)"
+                 ng-model="server" autocomplete="off" typeahead-loading="loadingServers" />
+          <i ng-show="loadingServers" class="glyphicon glyphicon-refresh"> loading</i>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
         </div>
       </div>
       <div class="row">
@@ -45,8 +53,8 @@
               <td>{{row.Role}}</td>
               <td>{{row.Description}}</td>
               <td>
-                <button type="button" ng-click="addAlert('You will need permission from the administrator.')">
-                  <i class="fa fa-remove">
+                <button type="button" class="btn btn-sm btn-success dropdown-toggle" ng-click="addAlert('You will need permission from the administrator.')" ng-disabled="admin">
+                  <i class="fa fa-caret-down">
                   </i>
                 </button>
               </td>
