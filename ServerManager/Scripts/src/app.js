@@ -11,14 +11,32 @@
     $httpProvider.defaults.headers.common["Content-Type"] = "application/json";
   });
 
-  app.controller('ctrl', function ($scope, $http, $timeout, ngToast) {
+  app.config(['$locationProvider', function ($locationProvider) {
+    $locationProvider.html5Mode(true);
+  }]);
+
+  app.controller('ctrl', function ($scope, $http, $timeout, $location, ngToast) {
     $scope.instances = [];
     $scope.servers = [];
     $scope.serverNames = [];
     $scope.alerts = [];
-    $scope.instance = "";
+    $scope.instance = $location.search().instance || "";
     $scope.server = "";
-    $scope.admin = true;
+    $scope.admin = false;
+
+    $scope.status = {
+      isopen: false
+    };
+
+    $scope.toggled = function (open) {
+      console.log('Dropdown is now: ', open);
+    };
+
+    $scope.toggleDropdown = function ($event) {
+      $event.preventDefault();
+      $event.stopPropagation();
+      $scope.status.isopen = !$scope.status.isopen;
+    };
 
     $scope.addAlert = function (message) {
       ngToast.create(message);
@@ -74,5 +92,18 @@
       });
       return results;
     };
+
+    $scope.serverEdit = function(id) {
+      addAlert("Edit function not available!");
+    };
+
+    $scope.serverHome = function(instance) {
+      window.location = "/ServerList/Home/Index?instance=" + instance;
+    };
+
+    $scope.serverDetail = function () {
+      window.location = "/ServerList/WebServer/details/" + $scope.server;
+    };
+
   });
 })();

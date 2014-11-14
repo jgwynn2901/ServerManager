@@ -54,6 +54,13 @@ textarea {
     margin-bottom: 15px;
     padding: 7px 9px;
   }
+
+  .form-horizontal {
+    margin-top: 24px;
+  }
+  .dl-horizontal {
+    margin-top: 24px; 
+  }
   .searchBar {
     margin: 24px auto 20px;
   }

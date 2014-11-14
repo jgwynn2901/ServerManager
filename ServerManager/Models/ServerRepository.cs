@@ -34,6 +34,26 @@ namespace ServerManager.Models
     }
 
     /// <summary>
+    /// Finds the specified server by name.
+    /// </summary>
+    /// <param name="serverName">Name of the server.</param>
+    /// <returns></returns>
+    static public Server Find(string serverName)
+    {
+      var results = new DbClassLibrary.ActiveRecords.Servers {Filter = string.Format("SERVER_NAME = '{0}'", serverName)};
+      return results.Results()
+        .Select(a => new Server
+        {
+          Id = a.ServerId,
+          Instance = a.DatabaseInstance,
+          IpAddress = a.IpAddress,
+          Name = a.ServerName,
+          Role = a.Role,
+          Uri = a.Uri,
+          Description = a.Description
+        }).First();
+    }
+    /// <summary>
     /// Gets the (cached) list of instances.
     /// </summary>
     /// <returns></returns>

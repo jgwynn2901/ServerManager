@@ -1,0 +1,74 @@
+﻿@model ServerManager.Models.Server
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="col-md-3"></div>
+<div class="col-md-6">
+  <div>
+    
+    <dl class="dl-horizontal">
+      <dt>
+        @Html.DisplayNameFor(model => model.Name)
+      </dt>
+
+      <dd>
+        @Html.DisplayFor(model => model.Name)
+      </dd>
+
+      <dt>
+        @Html.DisplayNameFor(model => model.Instance)
+      </dt>
+
+      <dd>
+        @Html.DisplayFor(model => model.Instance)
+      </dd>
+
+      <dt>
+        @Html.DisplayNameFor(model => model.Uri)
+      </dt>
+
+      <dd>
+        @Html.DisplayFor(model => model.Uri)
+      </dd>
+
+      <dt>
+        @Html.DisplayNameFor(model => model.IpAddress)
+      </dt>
+
+      <dd>
+        @Html.DisplayFor(model => model.IpAddress)
+      </dd>
+
+      <dt>
+        @Html.DisplayNameFor(model => model.Role)
+      </dt>
+
+      <dd>
+        @Html.DisplayFor(model => model.Role)
+      </dd>
+
+      <dt>
+        @Html.DisplayNameFor(model => model.Description)
+      </dt>
+
+      <dd>
+        @Html.DisplayFor(model => model.Description)
+      </dd>
+
+    </dl>
+  </div>
+
+    <div class="btn-group-sm">
+      <button class="btn btn-group-sm btn-success" ng-click="serverEdit('@Model.Id')">
+        <i class="fa fa-pencil-square-o">
+        </i>&nbsp;Edit
+      </button>
+      <button class="btn btn-success" ng-click="serverHome('@Model.Instance')">
+        <i class="fa fa-home">
+        </i>&nbsp;Back to List
+      </button>
+    </div>
+</div>
+<div class="col-md-3"></div>
